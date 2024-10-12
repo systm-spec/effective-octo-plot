@@ -7,14 +7,23 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 function App() {
   // const [count, setCount] = useState(0);
   const [a_data, setData] = useState([]);
+  const [img_data, setImgData] = useState({});
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/data")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  console.log(a_data);
-  console.log(typeof a_data);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/api/pic")
+      .then((res) => res.json())
+      .then((data) => setImgData(data));
+  }, []);
+
+  console.log(img_data);
+  console.log(typeof img_data);
+
   return (
     <div className="container">
       <div className="flex justify-center">
@@ -26,13 +35,20 @@ function App() {
         </a>
       </div>
       <div>
-        <BarChart width={600} height={400} data={a_data.mock_data}>
-          <XAxis dataKey={"test_products"} />
-          <YAxis />
-          <Tooltip />
-          <Legend className="bg-purple-950" />
-          <Bar dataKey={"test_sales"} fill="#8884d8" />
-        </BarChart>
+        {(a_data.mock_data && (
+          <BarChart width={600} height={400} data={a_data.mock_data}>
+            <XAxis dataKey={"test_products"} />
+            <YAxis />
+            <Tooltip />
+            <Legend className="bg-purple-950" />
+            <Bar dataKey={"test_sales"} fill="#8884d8" />
+          </BarChart>
+        )) || (
+          <img
+            src={"data:image/png;base64," + img_data["plot_url"]}
+            alt="pensi"
+          />
+        )}
       </div>
       <h1>Flask + React</h1>
       {/* <div className="card">
