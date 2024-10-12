@@ -11,7 +11,10 @@ testdata = {
     "test_sales" : [11, 22, 33, 44]
 }
 
-# API-Endpunkt zur Bereitstellung der Kategorien und Werte
+# API-Endpoints:
+@app.route('/', methods=['GET'])
+def welcomer():
+    return "<h1> Hello World </h1>"
 @app.route('/api/data', methods=['GET'])
 def get_data():
     # Pandas DataFrame
