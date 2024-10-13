@@ -3,15 +3,15 @@ import reactLogo from "./assets/react.svg";
 import pyLogo from "/py.svg";
 import "./App.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
-import { Bar_Chart } from "./types/BarChart";
-import { Data_As_Image } from "./types/Img";
+import { BarData } from "./types/BarChart";
+import { ImageData } from "./types/ImageChart";
 
 function App() {
-  const [chart_data, setData] = useState<Bar_Chart>({
+  const [chart_data, setData] = useState<BarData>({
     summary: { avg: 0, total: 0 },
     payload: [{ test_products: "", test_sales: 0 }],
   });
-  const [img_data, setImgData] = useState<Data_As_Image>({
+  const [img_data, setImgData] = useState<ImageData>({
     category: [],
     summary: [],
     plot_url: "",
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/data")
       .then((response) => response.json())
-      .then((data: Bar_Chart) => setData(data));
+      .then((data: BarData) => setData(data));
   }, []);
 
   useEffect(() => {
@@ -30,7 +30,6 @@ function App() {
   }, []);
 
   console.log(chart_data);
-  console.log(typeof chart_data);
 
   return (
     <div className="container">
@@ -40,7 +39,7 @@ function App() {
         {img_data.plot_url ? (
           <img
             src={"data:image/png;base64," + img_data["plot_url"]}
-            alt="pensi"
+            alt="picture"
           />
         ) : (
           <BarChart width={600} height={400} data={chart_data["payload"]}>

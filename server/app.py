@@ -26,7 +26,7 @@ def get_data():
 
     # JSON-Obj return
     return jsonify({
-        "mock_data": test_df.to_dict(orient='records'),
+        "payload": test_df.to_dict(orient='records'),
         "summary":{
             "AVG-Value": avg_value,
             "TOTAL-Value": total_value

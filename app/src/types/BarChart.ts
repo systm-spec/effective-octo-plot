@@ -1,8 +1,7 @@
-export interface Bar_Chart {
+export interface BarData {
   summary: Summary;
   payload: Data[];
 }
-
 export type Data = {
   test_products: string;
   test_sales: number;
