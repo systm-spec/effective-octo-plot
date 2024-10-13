@@ -3,31 +3,13 @@ import reactLogo from "./assets/react.svg";
 import pyLogo from "/py.svg";
 import "./App.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
-
-type MockData = {
-  test_products: string;
-  test_sales: number;
-};
-type Summary = {
-  avg: number;
-  total: number;
-};
-
-interface Chart_Data {
-  summary: Summary;
-  mock_data: MockData[];
-}
-
-interface Data_As_Image {
-  category: string[];
-  summary: number[];
-  plot_url: string;
-}
+import { Bar_Chart } from "./types/BarChart";
+import { Data_As_Image } from "./types/Img";
 
 function App() {
-  const [chart_data, setData] = useState<Chart_Data>({
+  const [chart_data, setData] = useState<Bar_Chart>({
     summary: { avg: 0, total: 0 },
-    mock_data: [{ test_products: "", test_sales: 0 }],
+    payload: [{ test_products: "", test_sales: 0 }],
   });
   const [img_data, setImgData] = useState<Data_As_Image>({
     category: [],
@@ -38,7 +20,7 @@ function App() {
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/data")
       .then((response) => response.json())
-      .then((data: Chart_Data) => setData(data));
+      .then((data: Bar_Chart) => setData(data));
   }, []);
 
   useEffect(() => {
@@ -61,7 +43,7 @@ function App() {
             alt="pensi"
           />
         ) : (
-          <BarChart width={600} height={400} data={chart_data["mock_data"]}>
+          <BarChart width={600} height={400} data={chart_data["payload"]}>
             <XAxis dataKey={"test_products"} />
             <YAxis />
             <Tooltip />
