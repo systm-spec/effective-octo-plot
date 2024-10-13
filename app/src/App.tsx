@@ -17,19 +17,22 @@ function App() {
     plot_url: "",
   });
 
+  // todo: fix effect to error not showing up ion console
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/data")
       .then((response) => response.json())
-      .then((data: BarData) => setData(data));
+      .then((data: BarData) => setData(data))
+      .catch((err) => err);
   }, []);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/api/pic")
       .then((res) => res.json())
-      .then((data) => setImgData(data));
+      .then((data) => setImgData(data))
+      .catch((err) => err);
   }, []);
 
-  console.log(chart_data);
+  // console.log(chart_data);
 
   return (
     <div className="container">
