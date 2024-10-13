@@ -26,7 +26,7 @@ function App() {
       .catch((err) => {
         console.log("Error: ", err);
       });
-  });
+  }, []);
 
   useEffect(() => {
     axios
