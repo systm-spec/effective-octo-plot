@@ -54,7 +54,7 @@ function App() {
             <XAxis dataKey={"test_products"} />
             <YAxis />
             <Tooltip />
-            <Legend className="bg-purple-950" />
+            <Legend />
             <Bar dataKey={"test_sales"} fill="#8884d8" />
           </BarChart>
         )}
