@@ -5,11 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BarChart from "./routes/Bar.tsx";
 import Root from "./routes/Root.tsx";
 import ImgData from "./routes/ImgData.tsx";
+import ErrorPage from "./ErrorPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/bar",
