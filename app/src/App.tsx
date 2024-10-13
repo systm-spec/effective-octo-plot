@@ -11,6 +11,7 @@ function App() {
   const [chart_data, setData] = useState<BarData>({
     summary: { avg: 0, total: 0 },
     payload: [{ test_products: "", test_sales: 0 }],
+    isPayload: false,
   });
   const [img_data, setImgData] = useState<ImageData>({
     category: [],
@@ -18,26 +19,29 @@ function App() {
     plot_url: "",
   });
 
-  // todo: fix effect to error not showing up ion console
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/data")
-      .then((res) => setData(res.data))
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/data");
+        setData(res.data);
+      } catch (err) {
+        console.error("Error fetching data: ", err);
+      }
+    };
+    if (!chart_data.isPayload) {
+      fetchData();
+    }
 
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:5000/api/pic")
-      .then((res) => setImgData(res.data))
-      .catch((er) => {
-        console.log("Error: ", er);
-      });
+    // const fetchImgData = async () => {
+    //   try {
+    //     const res = await axios.get("http://localhost:5000/api/pic");
+    //     setImgData(res.data);
+    //   } catch (err) {
+    //     console.error("Error fetching image data: ", err);
+    //   }
+    // };
+    // fetchImgData();
   }, []);
-
-  // console.log(chart_data);
 
   return (
     <div className="container">

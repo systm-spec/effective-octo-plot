@@ -30,7 +30,8 @@ def get_data():
         "summary":{
             "AVG-Value": avg_value,
             "TOTAL-Value": total_value
-        }
+        },
+        "isPayload": True
     })
 
 

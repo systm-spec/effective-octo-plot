@@ -1,6 +1,7 @@
 export interface BarData {
   summary: Summary;
   payload: Data[];
+  isPayload: boolean;
 }
 export type Data = {
   test_products: string;
