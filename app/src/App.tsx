@@ -5,6 +5,7 @@ import "./App.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import { BarData } from "./types/BarChart";
 import { ImageData } from "./types/ImageChart";
+import axios from "axios";
 
 function App() {
   const [chart_data, setData] = useState<BarData>({
@@ -19,17 +20,21 @@ function App() {
 
   // todo: fix effect to error not showing up ion console
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/data")
-      .then((response) => response.json())
-      .then((data: BarData) => setData(data))
-      .catch((err) => err);
-  }, []);
+    axios
+      .get("http://127.0.0.1:5000/api/data")
+      .then((res) => setData(res.data))
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/pic")
-      .then((res) => res.json())
-      .then((data) => setImgData(data))
-      .catch((err) => err);
+    axios
+      .get("http://127.0.0.1:5000/api/pic")
+      .then((res) => setImgData(res.data))
+      .catch((er) => {
+        console.log("Error: ", er);
+      });
   }, []);
 
   // console.log(chart_data);
