@@ -23,7 +23,6 @@ def get_data():
     # Calculation example: avg and sum
     avg_value = float(test_df["test_sales"].mean())
     total_value =float(test_df["test_sales"].sum())
-    print(type(avg_value), type(total_value))
 
     # JSON-Obj return
     return jsonify({
